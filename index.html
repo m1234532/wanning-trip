@@ -333,11 +333,11 @@
             padding: 6px 12px;
             border-radius: 15px;
             margin-top: 10px;
-            text-decoration: none;
             box-shadow: 0 3px 10px rgba(66,133,244,0.3);
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
+            font-family: inherit;
         }
 
         .map-link:hover {
@@ -768,9 +768,33 @@
             return null;
         }
 
-        // 生成高德地图链接
+        // 生成高德地图链接（支持唤起APP）
         function getMapUrl(location) {
-            return `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
+            // 尝试唤起高德APP的URL Scheme
+            const appUrl = `amapuri://route/plan/?dname=${encodeURIComponent(location)}&dev=0&t=0`;
+            return appUrl;
+        }
+        
+        // 打开地图（尝试唤起APP，失败则打开网页版）
+        function openMap(location) {
+            // 先尝试唤起APP
+            const appUrl = `amapuri://route/plan/?dname=${encodeURIComponent(location)}&dev=0&t=0`;
+            
+            // 记录当前时间，用于检测是否成功唤起
+            const startTime = Date.now();
+            
+            // 尝试打开APP
+            window.location.href = appUrl;
+            
+            // 如果2秒后页面还在，说明没有唤起成功，打开网页版
+            setTimeout(() => {
+                const endTime = Date.now();
+                // 如果时间差超过2000ms且页面未隐藏，说明APP未安装
+                if (endTime - startTime >= 2000 && document.visibilityState !== 'hidden') {
+                    const webUrl = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
+                    window.open(webUrl, '_blank');
+                }
+            }, 2000);
         }
 
         // 行程数据
@@ -911,9 +935,9 @@
                 const location = extractLocationFromNote(item.activity, item.note);
                 const actionButtonsHtml = location ? `
                     <div class="action-buttons">
-                        <a href="${getMapUrl(location)}" class="map-link" target="_blank">
+                        <button class="map-link" onclick="openMap('${location}')">
                             🗺️ 高德导航
-                        </a>
+                        </button>
                         <button class="copy-btn" onclick="copyAddress('${location}', this)">
                             📋 复制地址
                         </button>
