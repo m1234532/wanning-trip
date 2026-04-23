@@ -1,0 +1,80 @@
+【万宁行程网页 - 快速部署方法】
+
+═══════════════════════════════════════
+方法1: 使用 PowerShell 脚本（推荐）
+═══════════════════════════════════════
+
+1. 获取 GitHub Token:
+   - 访问: https://github.com/settings/tokens
+   - 点击 "Generate new token (classic)"
+   - 勾选 "repo" 权限
+   - 点击 "Generate token"
+   - 复制生成的 token（只显示一次）
+
+2. 运行部署脚本:
+   在 PowerShell 中执行:
+   cd "D:\虾宝的文件\Projects\wanning-trip"
+   .\deploy.ps1 -GitHubToken "你的token"
+
+3. 等待1-2分钟后访问:
+   https://m1234532.github.io/wanning-trip/
+
+
+═══════════════════════════════════════
+方法2: 手动上传（无需Token）
+═══════════════════════════════════════
+
+1. 创建仓库:
+   访问: https://github.com/new
+   - Repository name: wanning-trip
+   - Description: 🌴 万宁之旅 - 移动端行程规划
+   - 选择 Public
+   - ✅ 勾选 Add a README file
+   - 点击 Create repository
+
+2. 上传文件:
+   在仓库页面点击 "uploading an existing file"
+   选择这些文件上传:
+   - D:\虾宝的文件\Projects\wanning-trip\index.html
+   - D:\虾宝的文件\Projects\wanning-trip\README.md
+   - D:\虾宝的文件\Projects\wanning-trip\.gitignore
+
+3. 启用 GitHub Pages:
+   Settings → Pages → Source → Deploy from a branch
+   Branch: main / root → Save
+
+4. 访问网站:
+   https://m1234532.github.io/wanning-trip/
+
+
+═══════════════════════════════════════
+方法3: GitHub Desktop（图形界面）
+═══════════════════════════════════════
+
+1. 下载安装 GitHub Desktop: https://desktop.github.com/
+
+2. 登录你的 GitHub 账号
+
+3. 添加本地仓库:
+   File → Add local repository
+   选择: D:\虾宝的文件\Projects\wanning-trip
+
+4. 点击 "Publish repository"
+   - Name: wanning-trip
+   - 取消勾选 "Keep this code private"
+   - 点击 Publish
+
+5. 等待上传完成后，在网页端启用 GitHub Pages (同方法2步骤3)
+
+
+═══════════════════════════════════════
+部署状态检查
+═══════════════════════════════════════
+
+部署完成后，访问:
+https://m1234532.github.io/wanning-trip/
+
+如果显示404:
+- 检查 GitHub Pages 是否已启用 (Settings → Pages)
+- 等待 1-5 分钟让 GitHub 完成部署
+- 检查文件是否上传到 main 分支
