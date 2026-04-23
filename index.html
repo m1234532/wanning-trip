@@ -768,11 +768,24 @@
             return null;
         }
 
-        // 打开地图（使用高德Universal Link，最兼容方案）
+        // 打开地图（尝试唤起APP，失败则打开网页版）
         function openMap(location) {
-            // 使用高德Universal Link，自动唤起APP或打开网页版
-            const url = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
-            window.location.href = url;
+            // 尝试使用URL Scheme唤起APP
+            const schemeUrl = `amapuri://route/plan/?sid=&did=&dname=${encodeURIComponent(location)}&dev=0&t=0`;
+            
+            // 创建隐藏的iframe尝试唤起APP
+            const iframe = document.createElement('iframe');
+            iframe.style.cssText = 'display:none;width:0;height:0;';
+            iframe.src = schemeUrl;
+            document.body.appendChild(iframe);
+            
+            // 500ms后检查是否唤起成功
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+                // 如果页面还在，说明没有唤起成功，打开网页版
+                const webUrl = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
+                window.location.href = webUrl;
+            }, 500);
         }
 
         // 行程数据
