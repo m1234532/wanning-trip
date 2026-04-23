@@ -768,19 +768,20 @@
             return null;
         }
 
-        // 打开地图（鸿蒙系统使用window.open，其他系统使用location.href）
+        // 打开地图（按系统类型使用不同方案）
         function openMap(location) {
-            const url = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}&callnative=1`;
-            
             // 检测是否是鸿蒙系统
             const isHarmony = navigator.userAgent.toLowerCase().includes('harmony') || 
                               navigator.userAgent.toLowerCase().includes('openharmony');
             
             if (isHarmony) {
-                // 鸿蒙系统：使用window.open()唤起APP
-                window.open(url, '_blank');
+                // 鸿蒙系统：使用原生鸿蒙高德APP的URL Scheme
+                // 包名：com.amap.hmapp，Scheme：amapuri
+                const harmonyUrl = `amapuri://route/plan?dname=${encodeURIComponent(location)}&t=0`;
+                window.location.href = harmonyUrl;
             } else {
-                // iOS/Android：使用location.href
+                // iOS/Android：使用高德Universal Link
+                const url = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}&callnative=1`;
                 window.location.href = url;
             }
         }
