@@ -788,10 +788,9 @@
             }
             
             if (system === 'harmony') {
-                // 鸿蒙：使用华为地图或高德网页版
-                // 先尝试华为地图
-                const huaweiMapUrl = `mapapp://navigation?daddr=${encodeURIComponent(location)}`;
-                window.location.href = huaweiMapUrl;
+                // 鸿蒙：使用 iosamap:// 协议（高德地图标准协议）
+                const harmonyUrl = `iosamap://route/plan/?sid=&did=&dname=${encodeURIComponent(location)}&dev=0&t=0`;
+                window.location.href = harmonyUrl;
                 return;
             }
             
