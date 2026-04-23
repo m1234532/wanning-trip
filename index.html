@@ -200,9 +200,9 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 88px;
-            top: 20px;
-            bottom: 50px;
+            left: 101px;
+            top: 12px;
+            bottom: 40px;
             width: 2px;
             background: linear-gradient(180deg, 
                 rgba(255,255,255,0.8) 0%, 
@@ -260,7 +260,7 @@
             background: linear-gradient(135deg, #f4e4c1, #e8d5b5);
             border-radius: 50%;
             box-shadow: 0 0 0 4px rgba(255,255,255,0.3);
-            margin: 6px 10px 0;
+            margin: 4px 16px 0 6px;
             position: relative;
             z-index: 3;
         }
@@ -717,6 +717,28 @@
             return null;
         }
 
+        // 住宿类型特殊处理 - 从备注中提取地点
+        function extractLocationFromNote(activity, note) {
+            // 先尝试从活动中提取
+            const location = extractLocation(activity);
+            if (location) return location;
+            
+            // 住宿类特殊处理
+            if (activity.includes('HelloVilla') || note.includes('HelloVilla')) {
+                return '万宁石梅湾HelloVilla你好私舍';
+            }
+            if (activity.includes('海知家公寓') || note.includes('海知家公寓')) {
+                return '海口海知家公寓美兰机场店';
+            }
+            if (activity.includes('神州半岛') && activity.includes('退房')) {
+                return '万宁神州半岛';
+            }
+            if (activity.includes('石梅湾') && activity.includes('返回')) {
+                return '万宁石梅湾';
+            }
+            return null;
+        }
+
         // 生成高德地图链接
         function getMapUrl(location) {
             return `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
@@ -856,8 +878,8 @@
             dayData.items.forEach((item, index) => {
                 const driveHtml = item.drive ? `<div class="drive-info">🚗 ${item.drive}</div>` : '';
                 
-                // 提取地点并生成地图链接
-                const location = extractLocation(item.activity);
+                // 提取地点并生成地图链接（支持住宿等特殊类型）
+                const location = extractLocationFromNote(item.activity, item.note);
                 const actionButtonsHtml = location ? `
                     <div class="action-buttons">
                         <a href="${getMapUrl(location)}" class="map-link" target="_blank">
