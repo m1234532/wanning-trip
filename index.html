@@ -781,21 +781,21 @@
             const system = getSystemType();
             
             if (system === 'ios') {
-                // iOS：使用高德URL Scheme导航（显示路线方案）
+                // iOS：使用高德URL Scheme导航
                 const iosUrl = `amapuri://route/plan/?sid=&did=&dname=${encodeURIComponent(location)}&dev=0&t=0`;
                 window.location.href = iosUrl;
                 return;
             }
             
             if (system === 'harmony') {
-                // 鸿蒙：使用搜索链接（唤起APP后显示搜索结果）
-                const harmonyUrl = `amapuri://search?keyword=${encodeURIComponent(location)}`;
-                window.location.href = harmonyUrl;
+                // 鸿蒙：使用华为地图或高德网页版
+                // 先尝试华为地图
+                const huaweiMapUrl = `mapapp://navigation?daddr=${encodeURIComponent(location)}`;
+                window.location.href = huaweiMapUrl;
                 return;
             }
             
-            // Android：使用导航链接（显示路线方案）
-            // t=0 驾车, t=1 公交, t=2 步行, t=3 骑行
+            // Android：使用高德导航链接
             const androidUrl = `amapuri://route/plan/?sid=&did=&dname=${encodeURIComponent(location)}&dev=0&t=0`;
             window.location.href = androidUrl;
         }
