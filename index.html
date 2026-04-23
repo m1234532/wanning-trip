@@ -768,33 +768,111 @@
             return null;
         }
 
-        // 生成高德地图链接（支持唤起APP）
-        function getMapUrl(location) {
-            // 尝试唤起高德APP的URL Scheme
-            const appUrl = `amapuri://route/plan/?dname=${encodeURIComponent(location)}&dev=0&t=0`;
-            return appUrl;
+        // 打开地图（使用弹窗让用户选择打开方式）
+        function openMap(location) {
+            // 创建自定义弹窗
+            const modalHtml = `
+                <div id="mapModal" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.6);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    padding: 20px;
+                " onclick="if(event.target===this)closeMapModal()">
+                    <div style="
+                        background: white;
+                        border-radius: 16px;
+                        padding: 24px;
+                        width: 100%;
+                        max-width: 300px;
+                        text-align: center;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                    ">
+                        <div style="font-size: 24px; margin-bottom: 8px;">📍</div>
+                        <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 4px;">${location}</div>
+                        <div style="font-size: 13px; color: #666; margin-bottom: 20px;">选择打开方式</div>
+                        
+                        <button onclick="openMapApp('${location.replace(/'/g, "\\'")}')" style="
+                            display: block;
+                            width: 100%;
+                            padding: 14px;
+                            margin-bottom: 10px;
+                            background: linear-gradient(135deg, #4285f4, #34a853);
+                            color: white;
+                            border: none;
+                            border-radius: 12px;
+                            font-size: 15px;
+                            font-weight: 500;
+                            cursor: pointer;
+                        ">🗺️ 高德地图 APP</button>
+                        
+                        <button onclick="openMapWeb('${location.replace(/'/g, "\\'")}')" style="
+                            display: block;
+                            width: 100%;
+                            padding: 14px;
+                            margin-bottom: 10px;
+                            background: #f5f5f5;
+                            color: #333;
+                            border: none;
+                            border-radius: 12px;
+                            font-size: 15px;
+                            cursor: pointer;
+                        ">🌐 浏览器打开</button>
+                        
+                        <button onclick="closeMapModal()" style="
+                            display: block;
+                            width: 100%;
+                            padding: 12px;
+                            background: transparent;
+                            color: #999;
+                            border: none;
+                            font-size: 14px;
+                            cursor: pointer;
+                        ">取消</button>
+                    </div>
+                </div>
+            `;
+            
+            // 移除已存在的弹窗
+            const existingModal = document.getElementById('mapModal');
+            if (existingModal) existingModal.remove();
+            
+            // 插入弹窗
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
         
-        // 打开地图（尝试唤起APP，失败则打开网页版）
-        function openMap(location) {
-            // 先尝试唤起APP
-            const appUrl = `amapuri://route/plan/?dname=${encodeURIComponent(location)}&dev=0&t=0`;
+        // 关闭弹窗
+        function closeMapModal() {
+            const modal = document.getElementById('mapModal');
+            if (modal) modal.remove();
+        }
+        
+        // 打开高德APP
+        function openMapApp(location) {
+            closeMapModal();
             
-            // 记录当前时间，用于检测是否成功唤起
-            const startTime = Date.now();
+            // 尝试多种URL Scheme
+            const schemes = [
+                `amapuri://route/plan/?dname=${encodeURIComponent(location)}&dev=0&t=0`,
+                `androidamap://route?sourceApplication=web&dlat=&dlon=&dname=${encodeURIComponent(location)}&dev=0&t=0`,
+                `amapuri://search?keyword=${encodeURIComponent(location)}`
+            ];
             
-            // 尝试打开APP
-            window.location.href = appUrl;
-            
-            // 如果2秒后页面还在，说明没有唤起成功，打开网页版
-            setTimeout(() => {
-                const endTime = Date.now();
-                // 如果时间差超过2000ms且页面未隐藏，说明APP未安装
-                if (endTime - startTime >= 2000 && document.visibilityState !== 'hidden') {
-                    const webUrl = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
-                    window.open(webUrl, '_blank');
-                }
-            }, 2000);
+            // 尝试第一个方案
+            window.location.href = schemes[0];
+        }
+        
+        // 浏览器打开
+        function openMapWeb(location) {
+            closeMapModal();
+            const webUrl = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
+            window.open(webUrl, '_blank');
         }
 
         // 行程数据
