@@ -15,7 +15,6 @@
 
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            /* 梦幻椰林海岛渐变：深椰林绿 → 海洋蓝绿 → 天空蓝 */
             background: linear-gradient(180deg, 
                 #0d5c48 0%, 
                 #1a7a5e 15%, 
@@ -28,7 +27,6 @@
             position: relative;
         }
 
-        /* 椰林装饰图案 */
         body::before {
             content: '🌴';
             position: fixed;
@@ -53,14 +51,14 @@
             z-index: 0;
         }
 
-        /* Header - 毛玻璃效果 */
+        /* Header */
         .header {
             background: linear-gradient(135deg, 
                 rgba(255,255,255,0.15) 0%, 
                 rgba(255,255,255,0.05) 100%);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 35px 20px 30px;
+            padding: 35px 20px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.2);
             position: relative;
@@ -94,11 +92,51 @@
             font-weight: 400;
         }
 
-        /* 日期标签 - 毛玻璃 */
+        /* 顶部按钮组 */
+        .top-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px 20px 5px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.2) 0%, 
+                rgba(255,255,255,0.1) 100%);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.3) 0%, 
+                rgba(255,255,255,0.2) 100%);
+            transform: translateY(-2px);
+        }
+
+        .action-btn.active {
+            background: rgba(255,255,255,0.9);
+            color: #0d5c48;
+            font-weight: 600;
+        }
+
+        /* 日期标签 */
         .date-tabs {
             display: flex;
             overflow-x: auto;
-            padding: 20px 15px;
+            padding: 15px;
             gap: 12px;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
@@ -123,7 +161,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             text-align: center;
             line-height: 1.4;
         }
@@ -145,13 +182,17 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
+        /* 内容区域 */
+        .content-area {
+            position: relative;
+            z-index: 10;
+        }
+
         /* 时间轴 */
         .timeline {
             padding: 10px 20px 30px;
             max-width: 600px;
             margin: 0 auto;
-            position: relative;
-            z-index: 10;
         }
 
         .timeline-item {
@@ -217,7 +258,7 @@
             box-shadow: 0 0 0 4px rgba(255,255,255,0.3);
         }
 
-        /* 内容卡片 - 毛玻璃效果 */
+        /* 内容卡片 */
         .content-card {
             flex: 1;
             background: linear-gradient(135deg, 
@@ -248,7 +289,6 @@
             line-height: 1.5;
         }
 
-        /* 车程信息 - 海岛风 */
         .drive-info {
             display: inline-flex;
             align-items: center;
@@ -263,7 +303,6 @@
             box-shadow: 0 3px 10px rgba(32,178,170,0.3);
         }
 
-        /* 备注 */
         .note {
             font-size: 13px;
             color: #4a6355;
@@ -272,11 +311,29 @@
             border-top: 1px dashed rgba(13,92,72,0.2);
         }
 
-        .note::before {
-            content: '💡 ';
+        /* 地图跳转按钮 */
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin-top: 10px;
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(66,133,244,0.3);
+            transition: all 0.3s ease;
         }
 
-        /* 分类标签 - 海岛配色 */
+        .map-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66,133,244,0.4);
+        }
+
+        /* 分类标签 */
         .tag {
             display: inline-block;
             font-size: 10px;
@@ -319,6 +376,164 @@
         .tag-night { 
             background: linear-gradient(135deg, #1a237e, #283593); 
             color: #fff; 
+        }
+
+        /* 行李清单样式 */
+        .checklist-container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .checklist-container.active {
+            display: block;
+        }
+
+        .checklist-category {
+            margin-bottom: 24px;
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .checklist-category:nth-child(1) { animation-delay: 0.05s; }
+        .checklist-category:nth-child(2) { animation-delay: 0.1s; }
+        .checklist-category:nth-child(3) { animation-delay: 0.15s; }
+        .checklist-category:nth-child(4) { animation-delay: 0.2s; }
+        .checklist-category:nth-child(5) { animation-delay: 0.25s; }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.2) 0%, 
+                rgba(255,255,255,0.1) 100%);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media (min-width: 500px) {
+            .checklist-items {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .checklist-item {
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.9) 0%, 
+                rgba(255,255,255,0.85) 100%);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .checklist-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .checklist-item.checked {
+            background: linear-gradient(135deg, 
+                rgba(200,230,201,0.9) 0%, 
+                rgba(165,214,167,0.85) 100%);
+            border-color: #4caf50;
+        }
+
+        .checklist-item.checked .item-text {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #20b2aa;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .checklist-item.checked .checkbox {
+            background: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .checklist-item.checked .checkbox::after {
+            opacity: 1;
+        }
+
+        .item-text {
+            font-size: 13px;
+            color: #1a3a2f;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        /* 进度条 */
+        .progress-bar {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .progress-bar.active {
+            display: block;
+        }
+
+        .progress-info {
+            text-align: center;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .progress-track {
+            height: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.4);
         }
 
         /* Footer */
@@ -365,7 +580,12 @@
             .content-card { padding: 14px; }
             .activity-title { font-size: 14px; }
             .date-tab { padding: 12px 16px; font-size: 13px; }
+            .checklist-items { grid-template-columns: repeat(2, 1fr); }
+            .item-text { font-size: 12px; }
         }
+
+        /* 隐藏类 */
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -380,6 +600,17 @@
         <div class="subtitle">4天3晚 · 椰林海岛漫游计划</div>
     </div>
 
+    <!-- 顶部切换按钮 -->
+    <div class="top-actions">
+        <button class="action-btn active" id="btnItinerary" onclick="showItinerary()">
+            📅 行程安排
+        </button>
+        <button class="action-btn" id="btnChecklist" onclick="showChecklist()">
+            🎒 行李清单
+        </button>
+    </div>
+
+    <!-- 日期标签（行程模式显示） -->
     <div class="date-tabs" id="dateTabs">
         <div class="date-tab active" data-day="day1">📅 6月19日<br><small>周五</small></div>
         <div class="date-tab" data-day="day2">📅 6月20日<br><small>周六</small></div>
@@ -387,8 +618,21 @@
         <div class="date-tab" data-day="day4">📅 6月22日<br><small>周一</small></div>
     </div>
 
-    <div class="timeline" id="timeline">
-        <!-- 行程内容将通过 JS 动态生成 -->
+    <!-- 进度条（行李模式显示） -->
+    <div class="progress-bar" id="progressBar">
+        <div class="progress-info">已准备: <span id="progressText">0/0</span> (<span id="progressPercent">0%</span>)</div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content-area">
+        <!-- 行程时间轴 -->
+        <div class="timeline" id="timeline"></div>
+
+        <!-- 行李清单 -->
+        <div class="checklist-container" id="checklistContainer"></div>
     </div>
 
     <div class="footer">
@@ -397,6 +641,42 @@
     </div>
 
     <script>
+        // 地点名称到地图搜索关键词的映射
+        const locationMap = {
+            '三亚凤凰机场T3': '三亚凤凰国际机场T3航站楼',
+            '石梅湾': '万宁石梅湾',
+            '石梅湾HelloVilla': '万宁石梅湾HelloVilla你好私舍',
+            '日月湾': '万宁日月湾',
+            '216餐吧': '万宁日月湾216沙滩餐酒吧',
+            '洲仔岛码头': '万宁洲仔岛',
+            '神州半岛': '万宁神州半岛',
+            '泰六THAILUX': '万宁神州半岛泰六THAILUX泰式按摩',
+            '椰林公路': '万宁椰林公路',
+            '山钦湾': '万宁山钦湾',
+            '骑楼老街': '海口骑楼老街',
+            '海大南门夜市': '海口海大南门小吃街',
+            '美兰机场': '海口美兰国际机场',
+            '嗲嗲的椰子鸡': '万宁嗲嗲的椰子鸡',
+            '琼海市区': '琼海市',
+            '潭门海鲜': '琼海潭门海鲜',
+            '海口海知家公寓': '海口海知家公寓美兰机场店'
+        };
+
+        // 从活动中提取地点
+        function extractLocation(activity) {
+            for (const [key, value] of Object.entries(locationMap)) {
+                if (activity.includes(key)) {
+                    return value;
+                }
+            }
+            return null;
+        }
+
+        // 生成高德地图链接
+        function getMapUrl(location) {
+            return `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
+        }
+
         // 行程数据
         const tripData = [
             {
@@ -465,6 +745,30 @@
             }
         ];
 
+        // 行李清单数据
+        const checklistData = [
+            {
+                category: '👕 衣物类',
+                items: ['短袖T恤 3-4件', '短裤/裙子 2-3条', '防晒衣/薄外套', '泳衣/泳裤', '内衣裤 4套', '睡衣', '拖鞋', '运动鞋/沙滩鞋']
+            },
+            {
+                category: '🧴 洗护用品',
+                items: ['防晒霜 SPF50+', '晒后修复芦荟胶', '洗面奶', '护肤品', '洗发水/沐浴露', '牙刷牙膏', '毛巾', '干湿纸巾']
+            },
+            {
+                category: '📱 电子设备',
+                items: ['手机+充电器', '充电宝', '相机/GoPro', '防水手机袋', '耳机', '转换插头', '自拍杆', '数据线']
+            },
+            {
+                category: '🏖️ 海滩装备',
+                items: ['墨镜', '遮阳帽', '沙滩巾', '浮潜面镜', '防水包', '保鲜袋', '遮阳伞', '防蚊液']
+            },
+            {
+                category: '📋 证件/其他',
+                items: ['身份证', '驾驶证(租车)', '机票/酒店订单', '现金(备用)', '信用卡', '常用药品', '创可贴', '口罩']
+            }
+        ];
+
         // 渲染时间轴
         function renderTimeline(day) {
             const timeline = document.getElementById('timeline');
@@ -475,6 +779,15 @@
             let html = '';
             dayData.items.forEach((item, index) => {
                 const driveHtml = item.drive ? `<div class="drive-info">🚗 ${item.drive}</div>` : '';
+                
+                // 提取地点并生成地图链接
+                const location = extractLocation(item.activity);
+                const mapHtml = location ? `
+                    <a href="${getMapUrl(location)}" class="map-link" target="_blank">
+                        🗺️ 高德导航
+                    </a>
+                ` : '';
+                
                 html += `
                     <div class="timeline-item" style="animation-delay: ${index * 0.05}s">
                         <div class="time-marker">
@@ -488,6 +801,7 @@
                             </div>
                             ${driveHtml}
                             <div class="note">${item.note}</div>
+                            ${mapHtml}
                         </div>
                     </div>
                 `;
@@ -510,7 +824,88 @@
             return tagNames[tag] || '';
         }
 
-        // 切换日期
+        // 渲染行李清单
+        function renderChecklist() {
+            const container = document.getElementById('checklistContainer');
+            const savedState = JSON.parse(localStorage.getItem('wanningChecklist') || '{}');
+            
+            let html = '';
+            checklistData.forEach((category, catIndex) => {
+                html += `
+                    <div class="checklist-category" style="animation-delay: ${catIndex * 0.05}s">
+                        <div class="category-title">${category.category}</div>
+                        <div class="checklist-items">
+                `;
+                
+                category.items.forEach((item, itemIndex) => {
+                    const itemId = `item_${catIndex}_${itemIndex}`;
+                    const isChecked = savedState[itemId] || false;
+                    html += `
+                        <div class="checklist-item ${isChecked ? 'checked' : ''}" 
+                             onclick="toggleChecklistItem('${itemId}', this)"
+                             data-id="${itemId}">
+                            <div class="checkbox"></div>
+                            <div class="item-text">${item}</div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div></div>';
+            });
+            
+            container.innerHTML = html;
+            updateProgress();
+        }
+
+        // 切换行李清单项
+        function toggleChecklistItem(itemId, element) {
+            element.classList.toggle('checked');
+            
+            // 保存到localStorage
+            const savedState = JSON.parse(localStorage.getItem('wanningChecklist') || '{}');
+            savedState[itemId] = element.classList.contains('checked');
+            localStorage.setItem('wanningChecklist', JSON.stringify(savedState));
+            
+            updateProgress();
+        }
+
+        // 更新进度条
+        function updateProgress() {
+            const items = document.querySelectorAll('.checklist-item');
+            const checkedItems = document.querySelectorAll('.checklist-item.checked');
+            
+            const total = items.length;
+            const checked = checkedItems.length;
+            const percent = total > 0 ? Math.round((checked / total) * 100) : 0;
+            
+            document.getElementById('progressText').textContent = `${checked}/${total}`;
+            document.getElementById('progressPercent').textContent = `${percent}%`;
+            document.getElementById('progressFill').style.width = `${percent}%`;
+        }
+
+        // 切换视图
+        function showItinerary() {
+            document.getElementById('btnItinerary').classList.add('active');
+            document.getElementById('btnChecklist').classList.remove('active');
+            document.getElementById('dateTabs').style.display = 'flex';
+            document.getElementById('progressBar').classList.remove('active');
+            document.getElementById('timeline').style.display = 'block';
+            document.getElementById('checklistContainer').classList.remove('active');
+        }
+
+        function showChecklist() {
+            document.getElementById('btnItinerary').classList.remove('active');
+            document.getElementById('btnChecklist').classList.add('active');
+            document.getElementById('dateTabs').style.display = 'none';
+            document.getElementById('progressBar').classList.add('active');
+            document.getElementById('timeline').style.display = 'none';
+            document.getElementById('checklistContainer').classList.add('active');
+            
+            // 渲染清单
+            renderChecklist();
+        }
+
+        // 日期切换
         document.getElementById('dateTabs').addEventListener('click', (e) => {
             const tab = e.target.closest('.date-tab');
             if (!tab) return;
