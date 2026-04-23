@@ -768,28 +768,11 @@
             return null;
         }
 
-        // 检测系统类型
-        function getSystemType() {
-            const ua = navigator.userAgent.toLowerCase();
-            if (ua.includes('harmony') || ua.includes('openharmony')) return 'harmony';
-            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) return 'ios';
-            return 'android';
-        }
-        
-        // 打开地图（直接唤起APP）
+        // 打开地图（使用高德Universal Link，最兼容方案）
         function openMap(location) {
-            const system = getSystemType();
-            
-            if (system === 'ios') {
-                // iOS：使用 iosamap:// 导航
-                const iosUrl = `iosamap://navi?sourceApplication=web&poiname=${encodeURIComponent(location)}&lat=&lon=&dev=0`;
-                window.location.href = iosUrl;
-                return;
-            }
-            
-            // Android 和 鸿蒙 都使用 androidamap://（鸿蒙兼容Android方案）
-            const androidUrl = `androidamap://navi?sourceApplication=web&poiname=${encodeURIComponent(location)}&lat=&lon=&dev=0`;
-            window.location.href = androidUrl;
+            // 使用高德Universal Link，自动唤起APP或打开网页版
+            const url = `https://uri.amap.com/search?keyword=${encodeURIComponent(location)}`;
+            window.location.href = url;
         }
 
         // 行程数据
