@@ -200,9 +200,9 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 101px;
-            top: 12px;
-            bottom: 40px;
+            left: 86px;
+            top: 16px;
+            bottom: 30px;
             width: 2px;
             background: linear-gradient(180deg, 
                 rgba(255,255,255,0.8) 0%, 
@@ -218,6 +218,7 @@
             opacity: 0;
             position: relative;
             z-index: 2;
+            align-items: flex-start;
         }
 
         @keyframes slideIn {
@@ -233,34 +234,36 @@
 
         .time-marker {
             flex-shrink: 0;
-            width: 65px;
+            width: 60px;
             text-align: right;
-            padding-right: 15px;
+            padding-right: 18px;
+            padding-top: 4px;
         }
 
         .time-marker .time {
             color: white;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             background: linear-gradient(135deg, 
                 rgba(255,255,255,0.25) 0%, 
                 rgba(255,255,255,0.15) 100%);
             backdrop-filter: blur(10px);
-            padding: 5px 10px;
-            border-radius: 12px;
+            padding: 4px 8px;
+            border-radius: 10px;
             display: inline-block;
             border: 1px solid rgba(255,255,255,0.2);
             white-space: nowrap;
+            line-height: 1.4;
         }
 
         .timeline-dot {
             flex-shrink: 0;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background: linear-gradient(135deg, #f4e4c1, #e8d5b5);
             border-radius: 50%;
-            box-shadow: 0 0 0 4px rgba(255,255,255,0.3);
-            margin: 4px 16px 0 6px;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+            margin: 6px 12px 0 0;
             position: relative;
             z-index: 3;
         }
@@ -620,8 +623,10 @@
         @media (max-width: 400px) {
             .header h1 { font-size: 26px; }
             .header .subtitle { font-size: 13px; }
-            .time-marker { width: 55px; padding-right: 10px; }
-            .time-marker .time { font-size: 11px; padding: 4px 8px; }
+            .time-marker { width: 52px; padding-right: 12px; padding-top: 3px; }
+            .time-marker .time { font-size: 10px; padding: 3px 6px; }
+            .timeline::before { left: 78px; }
+            .timeline-dot { width: 12px; height: 12px; margin: 4px 10px 0 0; }
             .content-card { padding: 14px; }
             .activity-title { font-size: 14px; }
             .date-tab { padding: 12px 16px; font-size: 13px; }
@@ -704,7 +709,17 @@
             '嗲嗲的椰子鸡': '万宁嗲嗲的椰子鸡',
             '琼海市区': '琼海市',
             '潭门海鲜': '琼海潭门海鲜',
-            '海口海知家公寓': '海口海知家公寓美兰机场店'
+            '海口海知家公寓': '海口海知家公寓美兰机场店',
+            '嘉积鸭': '琼海嘉积鸭',
+            '东澳鹅': '万宁东澳鹅',
+            '和乐蟹': '万宁和乐蟹',
+            '港北对虾': '万宁港北对虾',
+            '陵水酸粉': '海口陵水酸粉',
+            '清补凉': '海口清补凉',
+            '糟粕醋': '海口糟粕醋',
+            '吴日彪蒜香排骨': '海口吴日彪蒜香排骨',
+            '甄大姑陵水酸粉': '海口甄大姑陵水酸粉',
+            '岛上简餐': '万宁洲仔岛'
         };
 
         // 从活动中提取地点
@@ -717,7 +732,7 @@
             return null;
         }
 
-        // 住宿类型特殊处理 - 从备注中提取地点
+        // 住宿和美食类型特殊处理 - 从备注中提取地点
         function extractLocationFromNote(activity, note) {
             // 先尝试从活动中提取
             const location = extractLocation(activity);
@@ -736,6 +751,20 @@
             if (activity.includes('石梅湾') && activity.includes('返回')) {
                 return '万宁石梅湾';
             }
+            
+            // 美食类特殊处理
+            if (activity.includes('午餐') || activity.includes('晚餐') || activity.includes('餐吧')) {
+                if (note.includes('嘉积鸭') || note.includes('潭门')) return '琼海潭门海鲜';
+                if (note.includes('东澳鹅') || note.includes('和乐蟹') || note.includes('港北对虾')) return '万宁神州半岛农家乐';
+                if (note.includes('陵水酸粉') || note.includes('蒜香排骨')) return '海口骑楼老街';
+                if (note.includes('清补凉') || note.includes('糟粕醋') || note.includes('烤生蚝')) return '海口海大南门小吃街';
+                if (note.includes('渔家乐') || note.includes('马鲛鱼')) return '万宁洲仔岛';
+            }
+            
+            // 夜游类地点
+            if (activity.includes('骑楼老街')) return '海口骑楼老街';
+            if (activity.includes('海大南门夜市') || activity.includes('夜市')) return '海口海大南门小吃街';
+            
             return null;
         }
 
