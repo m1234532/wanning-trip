@@ -781,21 +781,14 @@
             const system = getSystemType();
             
             if (system === 'ios') {
-                // iOS：使用高德URL Scheme导航
-                const iosUrl = `amapuri://route/plan/?sid=&did=&dname=${encodeURIComponent(location)}&dev=0&t=0`;
+                // iOS：使用 iosamap:// 导航
+                const iosUrl = `iosamap://navi?sourceApplication=web&poiname=${encodeURIComponent(location)}&lat=&lon=&dev=0`;
                 window.location.href = iosUrl;
                 return;
             }
             
-            if (system === 'harmony') {
-                // 鸿蒙：使用 iosamap:// 协议（高德地图标准协议）
-                const harmonyUrl = `iosamap://route/plan/?sid=&did=&dname=${encodeURIComponent(location)}&dev=0&t=0`;
-                window.location.href = harmonyUrl;
-                return;
-            }
-            
-            // Android：使用高德导航链接
-            const androidUrl = `amapuri://route/plan/?sid=&did=&dname=${encodeURIComponent(location)}&dev=0&t=0`;
+            // Android 和 鸿蒙 都使用 androidamap://（鸿蒙兼容Android方案）
+            const androidUrl = `androidamap://navi?sourceApplication=web&poiname=${encodeURIComponent(location)}&lat=&lon=&dev=0`;
             window.location.href = androidUrl;
         }
 
