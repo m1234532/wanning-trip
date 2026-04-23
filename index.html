@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌴 万宁之旅 | 4天3晚行程规划</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .header {
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        .date-tabs {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px;
+            gap: 10px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .date-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .date-tab {
+            flex-shrink: 0;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .date-tab.active {
+            background: rgba(255,255,255,0.9);
+            color: #764ba2;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .timeline {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .time-marker {
+            flex-shrink: 0;
+            width: 60px;
+            text-align: right;
+            padding-right: 15px;
+        }
+
+        .time-marker .time {
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .timeline-line {
+            flex-shrink: 0;
+            width: 2px;
+            background: rgba(255,255,255,0.3);
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.3);
+        }
+
+        .content-card {
+            flex: 1;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .activity-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .drive-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
+        }
+
+        .day-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 10px;
+            margin-right: 6px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 分类标签 */
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 8px;
+            margin-right: 6px;
+        }
+
+        .tag-flight { background: #e3f2fd; color: #1976d2; }
+        .tag-drive { background: #fff3e0; color: #f57c00; }
+        .tag-food { background: #fce4ec; color: #c2185b; }
+        .tag-hotel { background: #f3e5f5; color: #7b1fa2; }
+        .tag-activity { background: #e8f5e9; color: #388e3c; }
+        .tag-beach { background: #e0f7fa; color: #00838f; }
+        .tag-massage { background: #f1f8e9; color: #689f38; }
+        .tag-night { background: #263238; color: #fff; }
+
+        @media (max-width: 400px) {
+            .header h1 { font-size: 24px; }
+            .time-marker { width: 50px; padding-right: 10px; }
+            .content-card { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌴 万宁之旅</h1>
+        <div class="subtitle">4天3晚 · 海岛漫游计划</div>
+    </div>
+
+    <div class="date-tabs" id="dateTabs">
+        <div class="date-tab active" data-day="day1">📅 6月19日<br><small>周五</small></div>
+        <div class="date-tab" data-day="day2">📅 6月20日<br><small>周六</small></div>
+        <div class="date-tab" data-day="day3">📅 6月21日<br><small>周日</small></div>
+        <div class="date-tab" data-day="day4">📅 6月22日<br><small>周一</small></div>
+    </div>
+
+    <div class="timeline" id="timeline">
+        <!-- 行程内容将通过 JS 动态生成 -->
+    </div>
+
+    <div class="footer">
+        💜 用心规划每一刻 · 万宁等你来
+    </div>
+
+    <script>
+        // 行程数据
+        const tripData = [
+            {
+                day: "day1",
+                date: "6月19日",
+                weekday: "周五",
+                items: [
+                    { time: "10:10", activity: "✈️ 抵达三亚凤凰机场T3", drive: "", note: "T3航站楼出门右转，地面停车场提车；建议提前在神州租车下单", tag: "tag-flight" },
+                    { time: "10:30", activity: "🚗 取车+出发", drive: "", note: "（等取车约20分钟）", tag: "tag-drive" },
+                    { time: "10:30", activity: "🚗 自驾前往石梅湾", drive: "约1.5小时", note: "走环岛高速G98，途经亚龙湾、海棠湾，全程高速注意限速100km/h", tag: "tag-drive" },
+                    { time: "12:00", activity: "🍽️ 沿途午餐（琼海市区）", drive: "", note: "推荐嘉积鸭（白切蘸酱）、潭门海鲜（码头现买现做便宜又新鲜）；（用餐约1.5小时）", tag: "tag-food" },
+                    { time: "13:30", activity: "🚗 琼海→石梅湾HelloVilla", drive: "约1.5小时", note: "午餐后出发前往石梅湾HelloVilla", tag: "tag-drive" },
+                    { time: "14:00", activity: "🏨 入住HelloVilla你好私舍", drive: "约10分钟", note: "石梅湾私享海滩，人少安静；65㎡家庭套房，两晚连住6/19-6/21", tag: "tag-hotel" },
+                    { time: "16:00", activity: "🚗 石梅湾→日月湾", drive: "约20分钟", note: "导航至日月湾，海边路边可免费停车", tag: "tag-drive" },
+                    { time: "16:20-18:00", activity: "🏖️ 日月湾海滩+日落", drive: "", note: "海南最热门冲浪湾区；日落约18:55，在沙滩看完日落再离开；沙滩拍照光线最佳", tag: "tag-beach" },
+                    { time: "18:40", activity: "🚗 日月湾→216餐吧", drive: "约10分钟", note: "从海滩开车约10分钟，正好赶上216的日落篝火氛围", tag: "tag-drive" },
+                    { time: "18:40", activity: "🍹 216沙滩餐酒吧晚餐", drive: "", note: "日月湾标志性打卡地，沙滩篝火、东南亚风情；必点椰子水、烤海鲜、啤酒；（用餐约1.5小时）", tag: "tag-food" },
+                    { time: "19:15", activity: "🚗 216→石梅湾HelloVilla", drive: "约20分钟", note: "晚餐后返回Villa休息", tag: "tag-drive" }
+                ]
+            },
+            {
+                day: "day2",
+                date: "6月20日",
+                weekday: "周六",
+                items: [
+                    { time: "09:00", activity: "🚗 石梅湾→洲仔岛码头", drive: "约40分钟", note: "导航至洲仔岛码头，码头有停车场（收费）；提前1天在点评预约出海", tag: "tag-drive" },
+                    { time: "09:40", activity: "🚤 乘船上洲仔岛", drive: "", note: "（乘船约40分钟，玻璃海，桨板+浮潜一起玩；防晒SPF50+必须）", tag: "tag-activity" },
+                    { time: "09:40-12:00", activity: "🛶 洲仔岛桨板+浮潜", drive: "", note: "水质清澈见底，玻璃海超美；浮潜可见珊瑚、鱼群、海胆", tag: "tag-activity" },
+                    { time: "12:00", activity: "🍽️ 午餐（岛上简餐）", drive: "", note: "岛上渔家乐，现捕海鲜加工；推荐香煎马鲛鱼、蒜蓉鲍鱼、椰子饭；（用餐约40分钟）", tag: "tag-food" },
+                    { time: "13:40", activity: "🚤 乘船返回码头", drive: "", note: "（乘船返回洲仔岛码头）", tag: "tag-activity" },
+                    { time: "13:40", activity: "🚗 洲仔岛码头→日月湾", drive: "约20分钟", note: "开车前往日月湾继续冲浪", tag: "tag-drive" },
+                    { time: "14:00-16:30", activity: "🏄 冲浪体验（日月湾）", drive: "", note: "新手推荐日月湾冲浪俱乐部，请教练200元/小时含板；日落前浪最稳", tag: "tag-activity" },
+                    { time: "17:10", activity: "🚗 日月湾→神州半岛", drive: "约20分钟", note: "前往泰式按摩", tag: "tag-drive" },
+                    { time: "17:30-19:00", activity: "💆 泰六THAILUX泰式按摩", drive: "", note: "神州半岛泰式按摩老店，手法正宗；推荐泰式草球热敷、芳香精油按摩；约200-300元/人", tag: "tag-massage" },
+                    { time: "19:15", activity: "🚗 按摩店→石梅湾", drive: "约15分钟", note: "按摩完直接回石梅湾", tag: "tag-drive" },
+                    { time: "19:30", activity: "🍲 嗲嗲的椰子鸡（石梅湾店）", drive: "", note: "明星同款！椰子水现倒做锅底，文昌鸡嫩滑；必点椰子鸡、野生马齿苋、手打牛肉丸（人均约100元）", tag: "tag-food" }
+                ]
+            },
+            {
+                day: "day3",
+                date: "6月21日",
+                weekday: "周日",
+                items: [
+                    { time: "10:00", activity: "🏨 退房出发神州半岛", drive: "", note: "多睡会，慢悠悠出发", tag: "tag-hotel" },
+                    { time: "10:30-12:00", activity: "🛤️ 椰林公路walk+山钦湾", drive: "", note: "环岛旅游公路万宁段，椰林夹道超美；山钦湾小众秘境，黑礁石+燕子洞拍照超出片；注意礁石湿滑；建议先玩山钦湾再走椰林公路反方向", tag: "tag-activity" },
+                    { time: "12:00", activity: "🚗 山钦湾→神州半岛午餐", drive: "约10分钟", note: "导航至神州半岛附近农家乐", tag: "tag-drive" },
+                    { time: "12:30", activity: "🍽️ 午餐（神州半岛附近）", drive: "", note: "推荐农家乐：东澳鹅（白切）、和乐蟹（清蒸）、港北对虾；认准本地人去的店；（用餐约1.5小时）", tag: "tag-food" },
+                    { time: "15:30", activity: "🚗 神州半岛→海口", drive: "约2.5小时", note: "环岛高速G98直达，海口方向车少好开", tag: "tag-drive" },
+                    { time: "18:00", activity: "🏨 入住海口海知家公寓", drive: "约10分钟", note: "美兰机场店，距机场约10分钟车程，方便次日赶早班机", tag: "tag-hotel" },
+                    { time: "19:20", activity: "🚗 酒店→骑楼老街", drive: "约10分钟", note: "傍晚出发，夜游骑楼", tag: "tag-drive" },
+                    { time: "19:30", activity: "🏛️ 骑楼老街夜游", drive: "", note: "海口历史地标，南洋风格骑楼建筑；晚上灯光亮起更出片；必吃：甄大姑陵水酸粉、吴日彪蒜香排骨；夜游约1.5小时", tag: "tag-night" },
+                    { time: "21:00", activity: "🚗 骑楼老街→海大南门夜市", drive: "约10分钟", note: "前往海大南门小吃街", tag: "tag-drive" },
+                    { time: "21:00", activity: "🍢 海大南门夜市", drive: "", note: "海南大学南门小吃街，网红夜市；必吃：清补凉（椰奶/糖水）、陵水酸粉、糟粕醋、烤生蚝；约1小时", tag: "tag-night" },
+                    { time: "22:00", activity: "🚗 夜市→海口酒店", drive: "约10分钟", note: "返回酒店休息", tag: "tag-drive" }
+                ]
+            },
+            {
+                day: "day4",
+                date: "6月22日",
+                weekday: "周一",
+                items: [
+                    { time: "06:30", activity: "🏨 起床退房", drive: "", note: "退房前检查证件、充电宝、行李；提前确认航班动态", tag: "tag-hotel" },
+                    { time: "06:40", activity: "🚗 酒店→海口美兰机场", drive: "约10分钟", note: "美兰机场距公寓很近，导航至T2航站楼；提前1.5小时到机场", tag: "tag-drive" },
+                    { time: "08:25", activity: "✈️ CZ3515返程上海浦东", drive: "", note: "T2出发，实际到达约11:25；落地后可在机场取车或乘地铁", tag: "tag-flight" }
+                ]
+            }
+        ];
+
+        // 渲染时间轴
+        function renderTimeline(day) {
+            const timeline = document.getElementById('timeline');
+            const dayData = tripData.find(d => d.day === day);
+            
+            if (!dayData) return;
+
+            let html = '';
+            dayData.items.forEach((item, index) => {
+                const driveHtml = item.drive ? `<div class="drive-info">🚗 ${item.drive}</div>` : '';
+                html += `
+                    <div class="timeline-item" style="animation-delay: ${index * 0.05}s">
+                        <div class="time-marker">
+                            <span class="time">${item.time}</span>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="content-card">
+                            <div class="activity-title">
+                                <span class="tag ${item.tag}">${getTagName(item.tag)}</span>
+                                ${item.activity}
+                            </div>
+                            ${driveHtml}
+                            <div class="note">💡 ${item.note}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            timeline.innerHTML = html;
+        }
+
+        function getTagName(tag) {
+            const tagNames = {
+                'tag-flight': '航班',
+                'tag-drive': '车程',
+                'tag-food': '美食',
+                'tag-hotel': '住宿',
+                'tag-activity': '活动',
+                'tag-beach': '海滩',
+                'tag-massage': '按摩',
+                'tag-night': '夜游'
+            };
+            return tagNames[tag] || '';
+        }
+
+        // 切换日期
+        document.getElementById('dateTabs').addEventListener('click', (e) => {
+            const tab = e.target.closest('.date-tab');
+            if (!tab) return;
+
+            document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            renderTimeline(tab.dataset.day);
+        });
+
+        // 初始化
+        renderTimeline('day1');
+    </script>
+</body>
+</html>
