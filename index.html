@@ -15,124 +15,121 @@
 
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, 
-                #0d5c48 0%, 
-                #1a7a5e 15%, 
-                #2e8b7a 30%, 
-                #20b2aa 50%, 
-                #48d1cc 70%, 
-                #87ceeb 100%);
+            background: #2E86AB; /* 海洋蓝底色 */
             min-height: 100vh;
             padding-bottom: 40px;
             position: relative;
         }
 
+        /* 几何色块装饰 - Brutalist风格 */
         body::before {
-            content: '🌴';
+            content: '';
             position: fixed;
-            font-size: 120px;
-            opacity: 0.08;
-            top: 10%;
-            right: -30px;
-            transform: rotate(-15deg);
-            pointer-events: none;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 300px;
+            background: #F4D03F; /* 沙滩黄 */
+            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
             z-index: 0;
         }
 
         body::after {
-            content: '🥥';
+            content: '';
             position: fixed;
-            font-size: 80px;
-            opacity: 0.06;
-            bottom: 20%;
-            left: -20px;
-            transform: rotate(15deg);
-            pointer-events: none;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 200px;
+            background: #1E8449; /* 椰叶绿 */
+            clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
             z-index: 0;
         }
 
-        /* Header */
+        /* Header - Brutalist风格 */
         .header {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.15) 0%, 
-                rgba(255,255,255,0.05) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 35px 20px 20px;
+            background: #1E8449; /* 椰叶绿 */
+            padding: 30px 20px 25px;
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            border: 4px solid #000;
+            border-left: none;
+            border-right: none;
             position: relative;
             z-index: 10;
+            box-shadow: 0 6px 0 #000;
         }
 
         .header-badge {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 20px;
-            padding: 6px 16px;
+            background: #F4D03F; /* 沙滩黄 */
+            border: 3px solid #000;
+            padding: 8px 16px;
             font-size: 12px;
-            color: rgba(255,255,255,0.9);
+            color: #000;
+            font-weight: 700;
             margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .header h1 {
-            color: white;
-            font-size: 32px;
-            font-weight: 700;
+            color: #fff;
+            font-size: 36px;
+            font-weight: 900;
             margin-bottom: 10px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            -webkit-text-stroke: 2px #000;
         }
 
         .header .subtitle {
-            color: rgba(255,255,255,0.85);
+            color: #fff;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* 顶部按钮组 */
+        /* 顶部按钮组 - Brutalist */
         .top-actions {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            padding: 15px 20px 5px;
+            gap: 16px;
+            padding: 20px;
             position: relative;
             z-index: 10;
         }
 
         .action-btn {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.2) 0%, 
-                rgba(255,255,255,0.1) 100%);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
-            color: white;
+            padding: 12px 24px;
+            background: #fff;
+            border: 3px solid #000;
+            color: #000;
             font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 4px 4px 0 #000;
         }
 
         .action-btn:hover {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.3) 0%, 
-                rgba(255,255,255,0.2) 100%);
-            transform: translateY(-2px);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
         }
 
         .action-btn.active {
-            background: rgba(255,255,255,0.9);
-            color: #0d5c48;
-            font-weight: 600;
+            background: #F4D03F;
+            color: #000;
+            font-weight: 900;
+            box-shadow: 4px 4px 0 #000;
         }
 
-        /* 日期标签 */
+        /* 日期标签 - Brutalist */
         .date-tabs {
             display: flex;
             justify-content: center;
@@ -151,36 +148,30 @@
 
         .date-tab {
             flex-shrink: 0;
-            padding: 14px 22px;
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.12) 0%, 
-                rgba(255,255,255,0.05) 100%);
-            border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 20px;
-            color: rgba(255,255,255,0.85);
-            font-size: 14px;
+            padding: 14px 20px;
+            background: #fff;
+            border: 3px solid #000;
+            color: #000;
+            font-size: 13px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(15px);
+            transition: all 0.2s;
             text-align: center;
             line-height: 1.4;
+            text-transform: uppercase;
+            box-shadow: 3px 3px 0 #000;
         }
 
         .date-tab:hover {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.2) 0%, 
-                rgba(255,255,255,0.1) 100%);
-            transform: translateY(-2px);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
         }
 
         .date-tab.active {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.9) 0%, 
-                rgba(255,255,255,0.8) 100%);
-            color: #0d5c48;
-            font-weight: 600;
-            border-color: rgba(255,255,255,0.5);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            background: #E74C3C; /* 珊瑚红 */
+            color: #fff;
+            font-weight: 900;
+            box-shadow: 3px 3px 0 #000;
         }
 
         /* 内容区域 */
@@ -189,7 +180,7 @@
             z-index: 10;
         }
 
-        /* 时间轴 - WorkBuddy风格 */
+        /* 时间轴 - Brutalist风格 */
         .timeline {
             padding: 20px;
             max-width: 600px;
@@ -197,40 +188,37 @@
             position: relative;
         }
 
-        /* 时间轴主线 - 与圆点对齐: timeline padding 20px + time-section/2 27px */
+        /* 时间轴主线 - 粗黑线 */
         .timeline::before {
             content: '';
             position: absolute;
-            left: 46px;
+            left: 62px;
             top: 30px;
             bottom: 30px;
-            width: 2px;
-            background: linear-gradient(180deg,
-                rgba(255,255,255,0.6) 0%,
-                rgba(255,255,255,0.3) 50%,
-                rgba(255,255,255,0.1) 100%);
+            width: 4px;
+            background: #000;
             z-index: 1;
         }
 
         .timeline-item {
             display: flex;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             animation: slideIn 0.5s ease forwards;
             opacity: 0;
             position: relative;
             z-index: 2;
             align-items: flex-start;
-            gap: 12px;
+            gap: 16px;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateX(-20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
         }
 
@@ -240,46 +228,49 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 54px;
+            width: 60px;
             position: relative;
         }
 
         .time-marker {
             text-align: center;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
         .time-marker .time {
-            color: rgba(255,255,255,0.9);
-            font-size: 11px;
-            font-weight: 600;
-            line-height: 1.3;
+            color: #000;
+            font-size: 12px;
+            font-weight: 900;
+            line-height: 1.2;
             display: block;
+            background: #F4D03F;
+            padding: 6px 8px;
+            border: 3px solid #000;
+            box-shadow: 2px 2px 0 #000;
         }
 
         .timeline-dot {
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(135deg, #f4e4c1, #e8d5b5);
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+            width: 16px;
+            height: 16px;
+            background: #E74C3C;
+            border: 3px solid #000;
+            box-shadow: 2px 2px 0 #000;
             margin-top: 4px;
         }
 
-        /* 内容卡片 - WorkBuddy风格 */
+        /* 内容卡片 - Brutalist风格 */
         .content-card {
             flex: 1;
-            background: rgba(255,255,255,0.95);
-            border-radius: 16px;
+            background: #fff;
+            border: 3px solid #000;
             padding: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid rgba(255,255,255,0.6);
-            transition: all 0.3s ease;
+            box-shadow: 6px 6px 0 #000;
+            transition: all 0.2s;
         }
 
         .content-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 #000;
         }
 
         /* 大emoji标题区 */
@@ -287,99 +278,108 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .activity-emoji {
-            font-size: 36px;
+            font-size: 40px;
             line-height: 1;
             flex-shrink: 0;
         }
 
         .activity-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1a3a2f;
-            line-height: 1.4;
-            padding-top: 4px;
+            font-size: 16px;
+            font-weight: 900;
+            color: #000;
+            line-height: 1.3;
+            padding-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .drive-info {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            background: linear-gradient(135deg, #20b2aa, #48d1cc);
-            color: white;
-            font-size: 10px;
-            font-weight: 500;
-            padding: 4px 10px;
-            border-radius: 12px;
-            margin-bottom: 10px;
+            background: #3498DB;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 6px 10px;
+            border: 2px solid #000;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .note {
-            font-size: 12px;
-            color: #5a7365;
+            font-size: 13px;
+            color: #333;
             line-height: 1.6;
-            padding-top: 10px;
-            border-top: 1px dashed rgba(13,92,72,0.15);
+            padding-top: 12px;
+            border-top: 2px solid #000;
+            font-weight: 500;
         }
 
-        /* 地图跳转按钮 */
+        /* 地图跳转按钮 - Brutalist */
         .map-link {
             display: inline-flex;
             align-items: center;
-            gap: 3px;
-            background: linear-gradient(135deg, #4285f4, #34a853);
-            color: white;
-            font-size: 10px;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 12px;
-            margin-top: 8px;
-            transition: all 0.3s ease;
+            gap: 4px;
+            background: #1E8449;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 8px 12px;
+            border: 2px solid #000;
+            margin-top: 12px;
+            transition: all 0.2s;
             cursor: pointer;
-            border: none;
             font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 3px 3px 0 #000;
         }
 
         .map-link:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(66,133,244,0.3);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
         }
 
-        /* 复制地址按钮 */
+        /* 复制地址按钮 - Brutalist */
         .copy-btn {
             display: inline-flex;
             align-items: center;
-            gap: 3px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            color: white;
-            font-size: 10px;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 12px;
-            margin-top: 8px;
-            margin-left: 6px;
-            border: none;
-            transition: all 0.3s ease;
+            gap: 4px;
+            background: #E74C3C;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 8px 12px;
+            border: 2px solid #000;
+            margin-top: 12px;
+            margin-left: 8px;
+            transition: all 0.2s;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 3px 3px 0 #000;
         }
 
         .copy-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(255,107,107,0.3);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
         }
 
         .copy-btn.copied {
-            background: linear-gradient(135deg, #4caf50, #8bc34a);
+            background: #27AE60;
         }
 
         .action-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 6px;
+            gap: 8px;
+            margin-top: 8px;
         }
 
         /* 分类标签 */
@@ -427,7 +427,7 @@
             color: #fff; 
         }
 
-        /* 行李清单样式 */
+        /* 行李清单样式 - Brutalist */
         .checklist-container {
             padding: 20px;
             max-width: 600px;
@@ -453,25 +453,24 @@
 
         .category-title {
             font-size: 16px;
-            font-weight: 700;
-            color: white;
+            font-weight: 900;
+            color: #000;
             margin-bottom: 12px;
-            padding: 10px 16px;
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.2) 0%, 
-                rgba(255,255,255,0.1) 100%);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 16px;
+            background: #F4D03F;
+            border: 3px solid #000;
             display: flex;
             align-items: center;
             gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 4px 4px 0 #000;
         }
 
         .checklist-items {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
 
         @media (min-width: 500px) {
@@ -481,62 +480,56 @@
         }
 
         .checklist-item {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.9) 0%, 
-                rgba(255,255,255,0.85) 100%);
-            border-radius: 12px;
+            background: #fff;
+            border: 3px solid #000;
             padding: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            box-shadow: 3px 3px 0 #000;
         }
 
         .checklist-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
         }
 
         .checklist-item.checked {
-            background: linear-gradient(135deg, 
-                rgba(200,230,201,0.9) 0%, 
-                rgba(165,214,167,0.85) 100%);
-            border-color: #4caf50;
+            background: #27AE60;
+            color: #fff;
         }
 
         .checklist-item.checked .item-text {
             text-decoration: line-through;
-            opacity: 0.6;
+            opacity: 0.9;
         }
 
         .checkbox {
-            width: 22px;
-            height: 22px;
-            border: 2px solid #20b2aa;
-            border-radius: 6px;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #000;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: all 0.3s ease;
-            background: white;
+            transition: all 0.2s;
+            background: #fff;
         }
 
         .checklist-item.checked .checkbox {
-            background: #4caf50;
-            border-color: #4caf50;
+            background: #000;
+            border-color: #000;
         }
 
         .checkbox::after {
             content: '✓';
-            color: white;
+            color: #fff;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 900;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s;
         }
 
         .checklist-item.checked .checkbox::after {
@@ -545,12 +538,16 @@
 
         .item-text {
             font-size: 13px;
-            color: #1a3a2f;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            color: #000;
+            font-weight: 700;
+            transition: all 0.2s;
         }
 
-        /* 进度条 */
+        .checklist-item.checked .item-text {
+            color: #fff;
+        }
+
+        /* 进度条 - Brutalist */
         .progress-bar {
             padding: 20px;
             max-width: 600px;
@@ -564,76 +561,100 @@
 
         .progress-info {
             text-align: center;
-            color: white;
+            color: #000;
             margin-bottom: 15px;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .progress-track {
-            height: 12px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            height: 24px;
+            background: #fff;
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0 #000;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4caf50, #8bc34a);
-            border-radius: 10px;
+            background: #27AE60;
             transition: width 0.5s ease;
-            box-shadow: 0 2px 8px rgba(76,175,80,0.4);
         }
 
-        /* Footer */
+        /* Footer - Brutalist */
         .footer {
             text-align: center;
             padding: 30px 20px;
-            color: rgba(255,255,255,0.7);
-            font-size: 12px;
+            background: #F4D03F;
+            border: 4px solid #000;
+            border-left: none;
+            border-right: none;
+            margin-top: 40px;
             position: relative;
             z-index: 10;
         }
 
         .footer-icons {
-            font-size: 20px;
-            margin-bottom: 10px;
-            letter-spacing: 5px;
+            font-size: 28px;
+            margin-bottom: 12px;
+            letter-spacing: 8px;
         }
 
-        /* 浮动装饰 */
+        .footer-text {
+            font-size: 14px;
+            color: #000;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* 浮动装饰 - 几何图形 */
         .float-decor {
             position: fixed;
-            font-size: 40px;
-            opacity: 0.1;
+            width: 60px;
+            height: 60px;
+            background: #F4D03F;
+            border: 3px solid #000;
             pointer-events: none;
-            z-index: 1;
-            animation: float 6s ease-in-out infinite;
+            z-index: 0;
         }
 
-        .float-decor:nth-child(1) { top: 30%; left: 5%; animation-delay: 0s; }
-        .float-decor:nth-child(2) { top: 50%; right: 5%; animation-delay: 2s; }
-        .float-decor:nth-child(3) { bottom: 30%; left: 8%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+        .float-decor:nth-child(1) { 
+            top: 120px; 
+            right: 20px; 
+            transform: rotate(15deg);
+        }
+        .float-decor:nth-child(2) { 
+            top: 300px; 
+            left: 15px; 
+            background: #E74C3C;
+            transform: rotate(-10deg);
+        }
+        .float-decor:nth-child(3) { 
+            bottom: 200px; 
+            right: 30px; 
+            background: #1E8449;
+            transform: rotate(20deg);
         }
 
         /* 响应式 */
         @media (max-width: 400px) {
-            .header h1 { font-size: 26px; }
-            .header .subtitle { font-size: 13px; }
-            .time-section { width: 48px; }
-            .time-marker .time { font-size: 10px; }
-            .timeline::before { left: 23px; }
-            .timeline-dot { width: 8px; height: 8px; }
-            .content-card { padding: 14px; }
+            .header h1 { font-size: 28px; -webkit-text-stroke: 1.5px #000; }
+            .header .subtitle { font-size: 12px; }
+            .time-section { width: 50px; }
+            .time-marker .time { font-size: 10px; padding: 4px 6px; }
+            .timeline::before { left: 40px; }
+            .timeline-dot { width: 12px; height: 12px; }
+            .content-card { padding: 12px; box-shadow: 4px 4px 0 #000; }
             .activity-emoji { font-size: 32px; }
             .activity-title { font-size: 14px; }
-            .date-tab { padding: 12px 16px; font-size: 13px; }
+            .date-tab { padding: 10px 14px; font-size: 12px; box-shadow: 2px 2px 0 #000; }
+            .action-btn { padding: 10px 16px; font-size: 12px; box-shadow: 3px 3px 0 #000; }
             .checklist-items { grid-template-columns: repeat(2, 1fr); }
             .item-text { font-size: 12px; }
+            .map-link, .copy-btn { padding: 6px 10px; font-size: 10px; box-shadow: 2px 2px 0 #000; }
+            .float-decor { width: 40px; height: 40px; }
         }
 
         /* 隐藏类 */
@@ -641,10 +662,10 @@
     </style>
 </head>
 <body>
-    <!-- 浮动装饰 -->
-    <div class="float-decor">🌊</div>
-    <div class="float-decor">🏝️</div>
-    <div class="float-decor">🐚</div>
+    <!-- 浮动装饰 - 几何图形 -->
+    <div class="float-decor"></div>
+    <div class="float-decor"></div>
+    <div class="float-decor"></div>
 
     <div class="header">
         <div class="header-badge">🏝️ 海南·万宁</div>
@@ -689,7 +710,7 @@
 
     <div class="footer">
         <div class="footer-icons">🌴🌊☀️🥥🏄</div>
-        用心规划每一刻 · 万宁等你来
+        <div class="footer-text">用心规划每一刻 · 万宁等你来</div>
     </div>
 
     <script>
