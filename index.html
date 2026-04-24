@@ -77,10 +77,33 @@
             margin-bottom: 16px;
             letter-spacing: -1px;
             line-height: 1.1;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .header h1 span {
+        /* SplitText 字符动画 */
+        .header h1 .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: charReveal 0.6s ease forwards;
+            animation-delay: calc(var(--delay) * 0.08s);
+        }
+
+        .header h1 .char.highlight {
             color: #4ade80;
+        }
+
+        @keyframes charReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .header .subtitle {
@@ -651,7 +674,13 @@
 
     <div class="header">
         <div class="header-badge">🏝️ 海南·万宁</div>
-        <h1>🌴 <span>万宁</span>之旅</h1>
+        <h1 id="splitTitle">
+            <span class="char" style="--delay: 0">🌴</span>
+            <span class="char" style="--delay: 1">万</span>
+            <span class="char" style="--delay: 2">宁</span>
+            <span class="char highlight" style="--delay: 3">之</span>
+            <span class="char highlight" style="--delay: 4">旅</span>
+        </h1>
         <div class="subtitle">4天3晚 · 椰林海岛漫游计划</div>
     </div>
 
