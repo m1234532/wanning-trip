@@ -135,6 +135,7 @@
         /* 日期标签 */
         .date-tabs {
             display: flex;
+            justify-content: center;
             overflow-x: auto;
             padding: 15px;
             gap: 12px;
@@ -196,11 +197,11 @@
             position: relative;
         }
 
-        /* 时间轴主线 */
+        /* 时间轴主线 - 与圆点对齐: timeline padding 20px + time-section/2 27px */
         .timeline::before {
             content: '';
             position: absolute;
-            left: 26px;
+            left: 46px;
             top: 30px;
             bottom: 30px;
             width: 2px;
@@ -699,6 +700,7 @@
             '石梅湾HelloVilla': '万宁石梅湾HelloVilla你好私舍',
             '日月湾': '万宁日月湾',
             '216餐吧': '万宁日月湾216沙滩餐酒吧',
+            '216沙滩餐酒吧': '万宁日月湾216沙滩餐酒吧',
             '洲仔岛码头': '万宁洲仔岛',
             '神州半岛': '万宁神州半岛',
             '泰六THAILUX': '万宁神州半岛泰六THAILUX泰式按摩',
