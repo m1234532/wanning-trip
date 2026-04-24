@@ -15,126 +15,125 @@
 
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #2E86AB; /* 海洋蓝底色 */
+            background: #0f172a; /* GSAP深色背景 */
             min-height: 100vh;
             padding-bottom: 40px;
             position: relative;
+            color: #e2e8f0;
         }
 
-        /* 几何色块装饰 - Brutalist风格 */
+        /* GSAP风格装饰 - 微妙的渐变光晕 */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            right: 0;
-            width: 40%;
-            height: 300px;
-            background: #F4D03F; /* 沙滩黄 */
-            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(ellipse, rgba(74, 222, 128, 0.08) 0%, transparent 70%);
             z-index: 0;
+            pointer-events: none;
         }
 
         body::after {
             content: '';
             position: fixed;
-            bottom: 0;
-            left: 0;
+            bottom: -10%;
+            left: -10%;
             width: 50%;
-            height: 200px;
-            background: #1E8449; /* 椰叶绿 */
-            clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
+            height: 50%;
+            background: radial-gradient(ellipse, rgba(74, 222, 128, 0.05) 0%, transparent 70%);
             z-index: 0;
+            pointer-events: none;
         }
 
-        /* Header - Brutalist风格 */
+        /* Header - GSAP风格 */
         .header {
-            background: #1E8449; /* 椰叶绿 */
-            padding: 30px 20px 25px;
+            background: transparent;
+            padding: 60px 20px 40px;
             text-align: center;
-            border: 4px solid #000;
-            border-left: none;
-            border-right: none;
             position: relative;
             z-index: 10;
-            box-shadow: 0 6px 0 #000;
         }
 
         .header-badge {
             display: inline-block;
-            background: #F4D03F; /* 沙滩黄 */
-            border: 3px solid #000;
-            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid #4ade80;
+            padding: 8px 20px;
             font-size: 12px;
-            color: #000;
-            font-weight: 700;
-            margin-bottom: 15px;
+            color: #4ade80;
+            font-weight: 600;
+            margin-bottom: 24px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            border-radius: 20px;
         }
 
         .header h1 {
             color: #fff;
-            font-size: 36px;
-            font-weight: 900;
-            margin-bottom: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            -webkit-text-stroke: 2px #000;
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .header h1 span {
+            color: #4ade80;
         }
 
         .header .subtitle {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: #94a3b8;
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
-        /* 顶部按钮组 - Brutalist */
+        /* 顶部按钮组 - GSAP风格 */
         .top-actions {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 12px;
             padding: 20px;
             position: relative;
             z-index: 10;
         }
 
         .action-btn {
-            padding: 12px 24px;
-            background: #fff;
-            border: 3px solid #000;
-            color: #000;
+            padding: 12px 28px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 6px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 4px 4px 0 #000;
+            gap: 8px;
+            border-radius: 8px;
         }
 
         .action-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
         }
 
         .action-btn.active {
-            background: #F4D03F;
-            color: #000;
-            font-weight: 900;
-            box-shadow: 4px 4px 0 #000;
+            background: #4ade80;
+            color: #0f172a;
+            font-weight: 600;
+            border-color: #4ade80;
         }
 
-        /* 日期标签 - Brutalist */
+        /* 日期标签 - GSAP风格 */
         .date-tabs {
             display: flex;
             justify-content: center;
             overflow-x: auto;
-            padding: 15px;
+            padding: 20px;
             gap: 12px;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
@@ -148,30 +147,30 @@
 
         .date-tab {
             flex-shrink: 0;
-            padding: 14px 20px;
-            background: #fff;
-            border: 3px solid #000;
-            color: #000;
-            font-size: 13px;
-            font-weight: 700;
+            padding: 14px 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             text-align: center;
             line-height: 1.4;
-            text-transform: uppercase;
-            box-shadow: 3px 3px 0 #000;
+            border-radius: 10px;
         }
 
         .date-tab:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 #000;
+            background: rgba(255,255,255,0.08);
+            color: #94a3b8;
+            border-color: rgba(255,255,255,0.15);
         }
 
         .date-tab.active {
-            background: #E74C3C; /* 珊瑚红 */
-            color: #fff;
-            font-weight: 900;
-            box-shadow: 3px 3px 0 #000;
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            font-weight: 600;
+            border-color: #4ade80;
         }
 
         /* 内容区域 */
@@ -180,45 +179,45 @@
             z-index: 10;
         }
 
-        /* 时间轴 - Brutalist风格 */
+        /* 时间轴 - GSAP风格 */
         .timeline {
             padding: 20px;
-            max-width: 600px;
+            max-width: 680px;
             margin: 0 auto;
             position: relative;
         }
 
-        /* 时间轴主线 - 粗黑线 */
+        /* 时间轴主线 - 细线 */
         .timeline::before {
             content: '';
             position: absolute;
-            left: 62px;
-            top: 30px;
-            bottom: 30px;
-            width: 4px;
-            background: #000;
+            left: 27px;
+            top: 20px;
+            bottom: 20px;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(74, 222, 128, 0.3) 0%, rgba(74, 222, 128, 0.1) 100%);
             z-index: 1;
         }
 
         .timeline-item {
             display: flex;
-            margin-bottom: 24px;
-            animation: slideIn 0.5s ease forwards;
+            margin-bottom: 20px;
+            animation: slideIn 0.6s ease forwards;
             opacity: 0;
             position: relative;
             z-index: 2;
             align-items: flex-start;
-            gap: 16px;
+            gap: 20px;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateX(-20px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
 
@@ -228,7 +227,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 60px;
+            width: 56px;
             position: relative;
         }
 
@@ -238,141 +237,134 @@
         }
 
         .time-marker .time {
-            color: #000;
-            font-size: 12px;
-            font-weight: 900;
-            line-height: 1.2;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.3;
             display: block;
-            background: #F4D03F;
-            padding: 6px 8px;
-            border: 3px solid #000;
-            box-shadow: 2px 2px 0 #000;
         }
 
         .timeline-dot {
-            width: 16px;
-            height: 16px;
-            background: #E74C3C;
-            border: 3px solid #000;
-            box-shadow: 2px 2px 0 #000;
+            width: 12px;
+            height: 12px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.2);
             margin-top: 4px;
         }
 
-        /* 内容卡片 - Brutalist风格 */
+        /* 内容卡片 - GSAP风格 */
         .content-card {
             flex: 1;
-            background: #fff;
-            border: 3px solid #000;
-            padding: 16px;
-            box-shadow: 6px 6px 0 #000;
-            transition: all 0.2s;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
 
         .content-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0 #000;
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(74, 222, 128, 0.3);
+            transform: translateY(-2px);
         }
 
         /* 大emoji标题区 */
         .card-header {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 16px;
             margin-bottom: 12px;
         }
 
         .activity-emoji {
-            font-size: 40px;
+            font-size: 32px;
             line-height: 1;
             flex-shrink: 0;
+            opacity: 0.9;
         }
 
         .activity-title {
             font-size: 16px;
-            font-weight: 900;
-            color: #000;
-            line-height: 1.3;
-            padding-top: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+            color: #f1f5f9;
+            line-height: 1.4;
+            padding-top: 4px;
         }
 
         .drive-info {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            background: #3498DB;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 900;
-            padding: 6px 10px;
-            border: 2px solid #000;
+            gap: 6px;
+            background: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 6px;
             margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            border: 1px solid rgba(74, 222, 128, 0.2);
         }
 
         .note {
-            font-size: 13px;
-            color: #333;
-            line-height: 1.6;
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.7;
             padding-top: 12px;
-            border-top: 2px solid #000;
-            font-weight: 500;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
 
-        /* 地图跳转按钮 - Brutalist */
+        /* 地图跳转按钮 - GSAP风格 */
         .map-link {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            background: #1E8449;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 900;
-            padding: 8px 12px;
-            border: 2px solid #000;
+            gap: 6px;
+            background: transparent;
+            color: #4ade80;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            border-radius: 6px;
             margin-top: 12px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             cursor: pointer;
             font-family: inherit;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 3px 3px 0 #000;
         }
 
         .map-link:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 #000;
+            background: rgba(74, 222, 128, 0.1);
+            border-color: #4ade80;
         }
 
-        /* 复制地址按钮 - Brutalist */
+        /* 复制地址按钮 - GSAP风格 */
         .copy-btn {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            background: #E74C3C;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 900;
-            padding: 8px 12px;
-            border: 2px solid #000;
+            gap: 6px;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px;
             margin-top: 12px;
             margin-left: 8px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 3px 3px 0 #000;
         }
 
         .copy-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 #000;
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.25);
+            color: #e2e8f0;
         }
 
         .copy-btn.copied {
-            background: #27AE60;
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            border-color: #4ade80;
         }
 
         .action-buttons {
@@ -427,10 +419,10 @@
             color: #fff; 
         }
 
-        /* 行李清单样式 - Brutalist */
+        /* 行李清单样式 - GSAP风格 */
         .checklist-container {
             padding: 20px;
-            max-width: 600px;
+            max-width: 680px;
             margin: 0 auto;
             display: none;
         }
@@ -440,7 +432,7 @@
         }
 
         .checklist-category {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             animation: slideIn 0.5s ease forwards;
             opacity: 0;
         }
@@ -453,24 +445,22 @@
 
         .category-title {
             font-size: 16px;
-            font-weight: 900;
-            color: #000;
-            margin-bottom: 12px;
+            font-weight: 600;
+            color: #4ade80;
+            margin-bottom: 16px;
             padding: 12px 16px;
-            background: #F4D03F;
-            border: 3px solid #000;
+            background: rgba(74, 222, 128, 0.08);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            border-radius: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 4px 4px 0 #000;
+            gap: 10px;
         }
 
         .checklist-items {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
 
         @media (min-width: 500px) {
@@ -480,56 +470,58 @@
         }
 
         .checklist-item {
-            background: #fff;
-            border: 3px solid #000;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
             padding: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 3px 3px 0 #000;
+            transition: all 0.3s ease;
         }
 
         .checklist-item:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 #000;
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.12);
         }
 
         .checklist-item.checked {
-            background: #27AE60;
-            color: #fff;
+            background: rgba(74, 222, 128, 0.1);
+            border-color: rgba(74, 222, 128, 0.3);
         }
 
         .checklist-item.checked .item-text {
             text-decoration: line-through;
-            opacity: 0.9;
+            opacity: 0.6;
+            color: #4ade80;
         }
 
         .checkbox {
-            width: 24px;
-            height: 24px;
-            border: 3px solid #000;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: all 0.2s;
-            background: #fff;
+            transition: all 0.3s ease;
+            background: transparent;
         }
 
         .checklist-item.checked .checkbox {
-            background: #000;
-            border-color: #000;
+            background: #4ade80;
+            border-color: #4ade80;
         }
 
         .checkbox::after {
             content: '✓';
-            color: #fff;
-            font-size: 14px;
-            font-weight: 900;
+            color: #0f172a;
+            font-size: 12px;
+            font-weight: 700;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.3s ease;
         }
 
         .checklist-item.checked .checkbox::after {
@@ -537,20 +529,16 @@
         }
 
         .item-text {
-            font-size: 13px;
-            color: #000;
-            font-weight: 700;
-            transition: all 0.2s;
+            font-size: 14px;
+            color: #e2e8f0;
+            font-weight: 400;
+            transition: all 0.3s ease;
         }
 
-        .checklist-item.checked .item-text {
-            color: #fff;
-        }
-
-        /* 进度条 - Brutalist */
+        /* 进度条 - GSAP风格 */
         .progress-bar {
             padding: 20px;
-            max-width: 600px;
+            max-width: 680px;
             margin: 0 auto;
             display: none;
         }
@@ -561,100 +549,94 @@
 
         .progress-info {
             text-align: center;
-            color: #000;
-            margin-bottom: 15px;
-            font-size: 16px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .progress-track {
-            height: 24px;
-            background: #fff;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0 #000;
+            height: 8px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: #27AE60;
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            border-radius: 4px;
             transition: width 0.5s ease;
         }
 
-        /* Footer - Brutalist */
+        /* Footer - GSAP风格 */
         .footer {
             text-align: center;
-            padding: 30px 20px;
-            background: #F4D03F;
-            border: 4px solid #000;
-            border-left: none;
-            border-right: none;
-            margin-top: 40px;
+            padding: 40px 20px;
+            margin-top: 60px;
             position: relative;
             z-index: 10;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
 
         .footer-icons {
-            font-size: 28px;
-            margin-bottom: 12px;
+            font-size: 24px;
+            margin-bottom: 16px;
             letter-spacing: 8px;
+            opacity: 0.6;
         }
 
         .footer-text {
             font-size: 14px;
-            color: #000;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: #64748b;
+            font-weight: 400;
         }
 
-        /* 浮动装饰 - 几何图形 */
+        /* 浮动装饰 - GSAP风格光晕 */
         .float-decor {
             position: fixed;
-            width: 60px;
-            height: 60px;
-            background: #F4D03F;
-            border: 3px solid #000;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.1) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
+            filter: blur(40px);
         }
 
         .float-decor:nth-child(1) { 
-            top: 120px; 
-            right: 20px; 
-            transform: rotate(15deg);
+            top: 10%; 
+            right: 5%; 
         }
         .float-decor:nth-child(2) { 
-            top: 300px; 
-            left: 15px; 
-            background: #E74C3C;
-            transform: rotate(-10deg);
+            top: 40%; 
+            left: -5%; 
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, transparent 70%);
         }
         .float-decor:nth-child(3) { 
-            bottom: 200px; 
-            right: 30px; 
-            background: #1E8449;
-            transform: rotate(20deg);
+            bottom: 20%; 
+            right: 10%; 
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.08) 0%, transparent 70%);
         }
 
         /* 响应式 */
         @media (max-width: 400px) {
-            .header h1 { font-size: 28px; -webkit-text-stroke: 1.5px #000; }
-            .header .subtitle { font-size: 12px; }
-            .time-section { width: 50px; }
-            .time-marker .time { font-size: 10px; padding: 4px 6px; }
-            .timeline::before { left: 40px; }
-            .timeline-dot { width: 12px; height: 12px; }
-            .content-card { padding: 12px; box-shadow: 4px 4px 0 #000; }
-            .activity-emoji { font-size: 32px; }
-            .activity-title { font-size: 14px; }
-            .date-tab { padding: 10px 14px; font-size: 12px; box-shadow: 2px 2px 0 #000; }
-            .action-btn { padding: 10px 16px; font-size: 12px; box-shadow: 3px 3px 0 #000; }
+            .header { padding: 40px 16px 30px; }
+            .header h1 { font-size: 28px; }
+            .header .subtitle { font-size: 14px; }
+            .time-section { width: 48px; }
+            .time-marker .time { font-size: 10px; }
+            .timeline::before { left: 23px; }
+            .timeline-dot { width: 10px; height: 10px; }
+            .content-card { padding: 16px; }
+            .activity-emoji { font-size: 28px; }
+            .activity-title { font-size: 15px; }
+            .date-tab { padding: 12px 18px; font-size: 13px; }
+            .action-btn { padding: 10px 20px; font-size: 13px; }
             .checklist-items { grid-template-columns: repeat(2, 1fr); }
-            .item-text { font-size: 12px; }
-            .map-link, .copy-btn { padding: 6px 10px; font-size: 10px; box-shadow: 2px 2px 0 #000; }
-            .float-decor { width: 40px; height: 40px; }
+            .item-text { font-size: 13px; }
+            .map-link, .copy-btn { padding: 6px 12px; font-size: 11px; }
+            .float-decor { width: 120px; height: 120px; }
         }
 
         /* 隐藏类 */
@@ -669,7 +651,7 @@
 
     <div class="header">
         <div class="header-badge">🏝️ 海南·万宁</div>
-        <h1>🌴 万宁之旅</h1>
+        <h1>🌴 <span>万宁</span>之旅</h1>
         <div class="subtitle">4天3晚 · 椰林海岛漫游计划</div>
     </div>
 
